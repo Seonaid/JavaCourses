@@ -1,19 +1,19 @@
 
 /**
- * Write a description of Part1 here.
+ * Write a description of Part2 here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Part1 {
-    public String findSimpleGene(String dna){
+public class Part2 {
+    public String findSimpleGene(String dna, String startCodon, String stopCodon){
         String result = "";
-        int startIndex = dna.indexOf("ATG");
+        int startIndex = dna.indexOf(startCodon);
         if (startIndex == -1){
             return result;
         }
         
-        int stopIndex = dna.indexOf("TAA", startIndex+3);
+        int stopIndex = dna.indexOf(stopCodon, startIndex+3);
         if (stopIndex == -1){
             return result;
         }       
@@ -25,17 +25,17 @@ public class Part1 {
     public void testSimpleGene(){
         // contains complete gene
         String dna1 = "TCGCCCTAGATGATAGATTTCTGCTACTCTCCTCATAAGCAGTAAGGTGTATCGAAAGTACAAGACTAGCCTTGCTAGCAA";
-        String result = findSimpleGene(dna1);
+        String result = findSimpleGene(dna1, "ATG", "TAA");
         System.out.println("Gene 1: " + result);
         
         // No ATG
         String dna2 = "TCGCCCTAGATAATAGATTTCTGCTACTCTCCTCATAAGCAGTAAGGTGTATCGAAAGTACAAGACTAGCCTTGCTAGCAA";
-        result = findSimpleGene(dna2);
+        result = findSimpleGene(dna2, "ATG", "TAA");
         System.out.println("Gene 2: " + result);        
         
         // Starts but does not end
         String dna3 = "TCGCCCTAGATGATAGATTTCTGCTACTCTCCTCATAGGCAGTAGGGTGTATCGAAAGTACAAGACTAGCCTTGCTAGCAA";
-        result = findSimpleGene(dna3);
+        result = findSimpleGene(dna3, "ATG", "TAA");
         System.out.println("Gene 3: " + result);
     } 
 }
