@@ -37,5 +37,10 @@ public class Part2 {
         String dna3 = "TCGCCCTAGATGATAGATTTCTGCTACTCTCCTCATAGGCAGTAGGGTGTATCGAAAGTACAAGACTAGCCTTGCTAGCAA";
         result = findSimpleGene(dna3, "ATG", "TAA");
         System.out.println("Gene 3: " + result);
+        
+        String dna4 = "TCGCCCTAGATGATAGATTTCTGCTACTCTCCTCATAAGCAGTAAGGTGTATCGAAAGTACAAGACTAGCCTTGCTAGCAA";
+        dna4 = dna4.toLowerCase();
+        result = findSimpleGene(dna4, "atg", "taa");
+        System.out.println("Gene 4: " + result);        
     } 
 }
