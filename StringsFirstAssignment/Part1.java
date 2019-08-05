@@ -37,5 +37,10 @@ public class Part1 {
         String dna3 = "TCGCCCTAGATGATAGATTTCTGCTACTCTCCTCATAGGCAGTAGGGTGTATCGAAAGTACAAGACTAGCCTTGCTAGCAA";
         result = findSimpleGene(dna3);
         System.out.println("Gene 3: " + result);
+        
+        //Quiz question 1
+        String dna4 = "AAATGCCCTAACTAGATTAAGAAACC";
+        result = findSimpleGene(dna4);
+        System.out.println("Gene 4 Quiz: " + result);
     } 
 }

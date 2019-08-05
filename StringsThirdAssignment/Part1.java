@@ -1,4 +1,4 @@
-
+import edu.duke.*;
 /**
  * Write a description of Part1 here.
  * 
@@ -53,69 +53,80 @@ public class Part1 {
         return currentGene;
     };
     
-    public void printAllGenes(String dna){
+    public StorageResource getAllGenes(String dna){
         int startIndex = dna.toUpperCase().indexOf("ATG");
         String gene = "";
         int endGene = 0;
+        StorageResource allGenes = new StorageResource();
         System.out.println("start again");
         while(startIndex != -1){
             gene = findGene(dna);
             System.out.println(gene);
+            allGenes.add(gene);
             endGene = dna.indexOf(gene);
             dna = dna.substring(endGene + gene.length(), dna.length());
             //System.out.println("New DNA: " + dna);
             startIndex = dna.toUpperCase().indexOf("ATG");
-        };
-    };
-    
-    public void testFindStopCodon(){
-        String testDNA = "ccaaatggtgcgaaggtgatgttggataacataatccttggtttggccgttatttctataata";
-        int stopIndex = findStopCodon(testDNA, 4, "taa");
-        System.out.println(testDNA.substring(4, stopIndex));
-        
-        stopIndex = findStopCodon(testDNA, 4, "tag");
-        System.out.println(testDNA.substring(4, stopIndex));
-        
+        }
+        return allGenes;
     }
     
-    public void testFindGene(){
-        String testDNA = "";
-        String gene = "";
-        // no atg = no gene
-        testDNA = "ccaaatagtgcgaaggtgatattggataacataatccttggtttggccgttatttctataata";
-        gene = findGene(testDNA);
-        System.out.println("No ATG test: " + gene);
- 
-        // no stopCodon = no gene
-        testDNA = "ccaaatagtgcgaaggtcatattggagaacatcatccttggtttggccgttatttctatcata";
-        gene = findGene(testDNA);
-        System.out.println("No stopCodon: " + gene);
+    public int howMany(String stringa, String stringb){
+        int num = 0;
+        int startIndex = stringb.indexOf(stringa);
+        //System.out.println(stringa + " in " + stringb);
         
-        // Multiple valid nested stopCodons
-        testDNA = "ccaaatggtgcgaaggtgatgttggataacataatccttggtttggccgttatttctataata";
-        gene = findGene(testDNA);
-        System.out.println("Multiple valid genes: " + gene);
-        
-        // One gene at start
-        testDNA = "atgtaataacataatccttggtttggccgttatttctataata";
-        gene = findGene(testDNA);
-        System.out.println("One gene at start: " + gene); 
-        
-        testDNA = "AATGCTAACTAGCTGACTAAT";
-        gene = findGene(testDNA);
-        System.out.println("Quiz question 1: " + gene);
-    };
+        while (startIndex != -1){
+            num = num+1;
+            //System.out.println("total counted: ");
+            //System.out.println(num);
+            startIndex = stringb.indexOf(stringa, startIndex + stringa.length());
+            //System.out.println(startIndex);
+        }
+        return num;
+    } 
     
-    public void testPrintAllGenes(){
+    public double cgRatio(String dna){
+        String searchChar = "c";
+        double numCs = howMany(searchChar, dna.toLowerCase());
+        searchChar = "g";
+        double numGs = howMany(searchChar, dna.toLowerCase());
+        
+        return (numCs + numGs)/dna.length();
+    }
+    
+    public int countCTG(String dna){
+        return howMany("ctg", dna.toLowerCase());
+    }
+    
+    public void testGetAllGenes(){
         String testDNA = "ccaaatggtgcgaaggtgaatgtaataacataatccttggtttggccgttatttctataata";
         System.out.println("stop codon is tga, two genes");
-        printAllGenes(testDNA);
+        getAllGenes(testDNA);
         
         // no atg = no gene
         testDNA = "ccaaatagtgcgaaggtgatattggataacataatccttggtttggccgttatttctataata";
         System.out.println("No startCodon");
-        printAllGenes(testDNA);
+        StorageResource genes = getAllGenes(testDNA);
+        for (String g: genes.data()){
+            System.out.println(g);
+        }
         
         System.out.println("All tests run");
-    };
+    }
+    
+    public void testCgRatio(){
+        System.out.println("\nStart testCgRatio");
+        String testDNA = "ATGCCATAG";
+        System.out.println("ATGCCATAG expects 4/9 = 0.44444... " + cgRatio(testDNA));
+        
+        
+        System.out.println("All tests run");
+    }
+    
+    public void testCountCTG(){
+        System.out.println("\nStart testCountCTG");
+        String testDNA = "CTGAAATAGCTGAAGGTA";
+        System.out.println("CTGAAATAGCTGAAGGTA expects 2... " + countCTG(testDNA));
+    }
 }
