@@ -116,6 +116,11 @@ public class Part1 {
         System.out.println("No startCodon");
         printAllGenes(testDNA);
         
+        // from 
+        testDNA = "atgcctattggatccaaagagaggccaacattttttga";
+        System.out.println("BRAC excerpt: ");
+        printAllGenes(testDNA);
+        
         System.out.println("All tests run");
-    };
+    };   
 }

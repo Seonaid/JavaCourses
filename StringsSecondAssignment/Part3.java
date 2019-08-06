@@ -101,5 +101,7 @@ public class Part3 {
         if (geneCount != 0) System.out.println("error in nil gene");
         
         System.out.println("All tests run");
-    };    
+    };
+
+
 }
